@@ -1,0 +1,6 @@
+package com.yeshoda.medical.config;
+import org.springframework.context.annotation.*; import org.springframework.security.config.annotation.web.builders.HttpSecurity; import org.springframework.security.config.http.SessionCreationPolicy; import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; import org.springframework.security.crypto.password.PasswordEncoder; import org.springframework.security.web.SecurityFilterChain; import org.springframework.web.cors.*; import java.util.List;
+@Configuration public class SecurityConfig {
+ @Bean PasswordEncoder passwordEncoder(){return new BCryptPasswordEncoder();}
+ @Bean SecurityFilterChain security(HttpSecurity http) throws Exception {http.csrf(c->c.disable()).cors(c->c.configurationSource(req->{CorsConfiguration x=new CorsConfiguration();x.setAllowedOrigins(List.of("http://localhost:3000"));x.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));x.setAllowedHeaders(List.of("*"));return x;})).sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authorizeHttpRequests(a->a.requestMatchers("/api/auth/**","/api/doctors/**","/api/ai/**","/h2-console/**").permitAll().anyRequest().permitAll()).headers(h->h.frameOptions(f->f.sameOrigin()));return http.build();}
+}

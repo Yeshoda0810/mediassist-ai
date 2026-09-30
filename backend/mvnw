@@ -1,0 +1,12 @@
+#!/bin/sh
+# Minimal Maven wrapper bootstrap. Downloads Maven 3.9.11 if needed.
+MVN_VERSION=3.9.11
+DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+M2="$DIR/.maven/apache-maven-$MVN_VERSION"
+if [ ! -x "$M2/bin/mvn" ]; then
+  mkdir -p "$DIR/.maven"
+  curl -fsSL "https://archive.apache.org/dist/maven/maven-3/$MVN_VERSION/binaries/apache-maven-$MVN_VERSION-bin.tar.gz" -o "$DIR/.maven/maven.tgz"
+  tar -xzf "$DIR/.maven/maven.tgz" -C "$DIR/.maven"
+  rm "$DIR/.maven/maven.tgz"
+fi
+exec "$M2/bin/mvn" "$@"

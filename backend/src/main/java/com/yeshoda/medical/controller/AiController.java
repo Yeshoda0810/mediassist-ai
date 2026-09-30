@@ -1,0 +1,2 @@
+package com.yeshoda.medical.controller; import com.yeshoda.medical.dto.AiRequest; import com.yeshoda.medical.service.AiService; import org.springframework.web.bind.annotation.*; import java.util.Map;
+@RestController @RequestMapping("/api/ai") public class AiController {private final AiService s;public AiController(AiService s){this.s=s;} @PostMapping("/chat") public Map<String,String> chat(@RequestBody AiRequest r){return Map.of("reply",s.ask(r.message()));}}
