@@ -7,7 +7,7 @@ A full-stack medical appointment assistant. Patients can find doctors, book and 
 
 > The backend runs on a free Render instance, so the first request after a period of inactivity can take up to a minute while it wakes up.
 
-## Screenshots
+## Screenshots (Find the images in docs file )
 
 | Dashboard | Find a doctor |
 |---|---|
